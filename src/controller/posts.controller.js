@@ -45,30 +45,30 @@ class PostsController {
   }
 
   deletePost(req, res) {
-    const userId = Number(req.params.id);
-    if (isNaN(userId)) {
+    const postId = Number(req.params.id);
+    if (isNaN(postId)) {
       res.status(400).json({ error: "Invalid user ID" });
       return;
     }
     try {
-      const users = deleteData("users", userId);
-      res.status(200).json(users);
+      const posts = deleteData("posts", postId);
+      res.status(200).json(posts);
     } catch (error) {
       res.status(500).json({ error: "Server Error" });
     }
   }
 
   editPost(req, res) {
-    const userId = Number(req.params.id);
-    if (isNaN(userId)) {
+    const postId = Number(req.params.id);
+    if (isNaN(postId)) {
       res.status(400).json({ error: "Invalid user ID" });
       return;
     }
 
-    const updatedUser = req.body;
+    const updatedPost = req.body;
     try {
-      const users = editData("users", userId, updatedUser);
-      res.status(200).json(users);
+      const post = editData("posts", postId, updatedPost);
+      res.status(200).json(post);
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
     }
